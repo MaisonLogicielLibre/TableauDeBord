@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if isCentech or isFounderOfCompany%}
+    {% if isCentech or isFounderOfCompany %}
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             {% trans "Actions on this company" %}
@@ -78,7 +78,7 @@
                                     <span class="green" style="width: {{company.get_percentage_incubation_time}}%">{{company.get_percentage_incubation_time}}%</span>
                                 {% endif %}
                             </div>
-                            <div align="center">{% trans "Time spent incubation" %} : {{company.get_percentage_incubation_time}}%</div>
+                            <div align="center">{% trans "Time spent" %} : {{company.get_percentage_incubation_time}}%</div>
                         </div>
                     </div>
             {% endif %}
@@ -144,7 +144,8 @@
                                     <img class="avatar" src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;" /><br>
                                 {% endif %}
                                 {{ mentor.user.first_name }} {{ mentor.user.last_name }}
-                            </a>
+                            </a><br/>
+                            {{ mentor.get_type }}
                         </div>
                         {% if forloop.counter|divisibleby:3 %}
                             <div class="row" style="margin-bottom: 50px;">
@@ -154,6 +155,41 @@
                 </div>
             {% else %}
                 <p>{% trans "No mentors exist." %}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h3>{% trans "Room rental" %}</h3></div>
+        <div class="panel-body">
+            {% if rentals %}
+                <table cellpadding="0" cellspacing="0" class="table table-bordered">
+                    <tr>
+                        <th>{% trans "Room" %}</th>
+                        <th>{% trans "Start date" %}</th>
+                        <th>{% trans "End date" %}</th>
+                        {% if isCentech == True %}
+                        <th>{% trans "Modify" %}</th>
+                        <th>{% trans "Delete" %}</th>
+                        {% endif %}
+                    </tr>
+                    {% for rental in rentals %}
+                        <tr>
+                            <td>{{ rental.room.code }}</td>
+                            <td>{{ rental.date_start }}</td>
+                            <td>{{ rental.date_end }}</td>
+                            {% if isCentech == True %}
+                            <td><a href="{% url 'company:rental_update' rental.id %}">{% trans "Modify" %}</a></td>
+                            <td><a href="{% url 'company:rental_delete' rental.id %}">{% trans "Delete" %}</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>{% trans "No room rentals found." %}</p>
+            {% endif %}
+            {% if isCentech == True %}
+            <p><a href="{% url 'company:rental_create' company.id %}" class="btn btn-primary" style="margin:0">New rental</a></p>
             {% endif %}
         </div>
     </div>

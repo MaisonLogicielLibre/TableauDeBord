@@ -33,12 +33,12 @@ class Company(models.Model):
     url = models.URLField(blank=True, verbose_name=_('URL'))
     video = EmbedVideoField(blank=True, verbose_name=_('Video'))
     description = models.TextField(blank=True, max_length=2000, verbose_name=_('Description'))
-    companyStatus = models.ForeignKey(CompanyStatus, verbose_name=_('Status'))
+    companyStatus = models.ForeignKey(CompanyStatus, verbose_name=_('Status'), related_name="companies")
 
     # List of founders
-    founders = models.ManyToManyField(Founder, blank=True, verbose_name=_('Founders'), related_name = "company")
+    founders = models.ManyToManyField(Founder, blank=True, verbose_name=_('Founders'), related_name="company")
     # List of mentors
-    mentors = models.ManyToManyField(Mentor, blank=True, verbose_name=_('Mentors'), related_name = "company")
+    mentors = models.ManyToManyField(Mentor, blank=True, verbose_name=_('Mentors'), related_name="company")
 
     facebook = models.URLField(blank=True, null=True, verbose_name=_('Facebook'))
     twitter = models.URLField(blank=True, null=True, verbose_name=_('Twitter'))

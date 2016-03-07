@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 Cet exemple ce base sur l'utilisation d'une table MySQL.
 
- 1 - Créer une nouvelle table dans votre base de données.
+ 1 - Créer une nouvelle base de données.
 
  2 - Entrez vos paramètres de connexion dans `../TableauDeBord/centech2/settings.py`
 

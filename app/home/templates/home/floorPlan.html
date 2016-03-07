@@ -1,15 +1,45 @@
 {% extends "dashboard.html" %}
 <!-- Load internationalisation utils-->
-{% load i18n %}
+{% load i18n staticfiles extras %}
+
 {% block title %}{{app.site.entreprise.name}} | {% trans "Floor plan" %}{% endblock %}
+
+{% block extrahead %}
+    <style>
+        .floor_map {
+            user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+{% endblock %}
+
+{% block extrajs %}
+    <script src="{% static 'js/jquery.maphilight.js' %}"></script>
+    <script src="{% static 'js/jquery.maphilight_configs.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $('.floor_map').maphilight()
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
 
 <div class="row" align="center">
     <div class="col-sm-12">
-        {% for element in list_floor_plan %}
-            <h2>{{element.title|title}}</h2>
-            <img src="/media/{{ element.image }}" style="max-width: 100%;"/><br>
-        {% endfor %}
+        <h2>Plan d'étage</h2>
+        <div class="floor_map_wrapper">
+            <img class="floor_map maphilighted" src="/media/floor_map/floor_map.jpg" usemap="#map_coords" />
+        </div>
+        <map name="map_coords">
+            {% for room in list_room_data %}
+                <area shape="{{ room.coords|shape }}" alt="{{ room.code }}" coords="{{ room.coords|coords_list }}" />
+            {% endfor %}
+        </map><br />
     </div>
 </div>
 

@@ -23,7 +23,7 @@
             {% endif %}
 
             <h1><strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong></h1>
-
+            <h4>{{ mentor.get_type }}</h4>
             {% if mentor.facebook %}
                 <a href="{{mentor.facebook}}"><i class="fa fa-facebook-square fa-3x"></i></a>
             {% endif %}

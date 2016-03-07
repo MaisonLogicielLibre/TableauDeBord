@@ -24,22 +24,19 @@
     {% if mentorFilter %}
     <div class="row" style="margin-bottom: 50px;">
         {% for mentor in mentorFilter %}
-        <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
-            <a href="{% url 'mentor:detail' mentor.pk %}">
-            {% if mentor.picture != "" %}
-                <img src="/media/{{ mentor.picture }}" style="height:100%; max-width: 100%;"/><br>
-            {% else %}
-                <img src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
-            {% endif %}
-
-            <strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong>
-            </a>
-            <br>
+        <div class="col-md-3" style="padding: 10px;">
+            <div class="panel" style="height: 150px; padding: 10px;">
+                <a href="{% url 'mentor:detail' mentor.pk %}">
+                    {% if mentor.picture != "" %}
+                        <img src="/media/{{ mentor.picture }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                    {% else %}
+                        <img src="/media/user_profile/default.jpg"  class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                    {% endif %}
+                    <strong>{{ mentor.user.first_name }} {{ mentor.user.last_name }}</strong>
+                </a><br>
+                {{ mentor.get_type }}
+            </div>
         </div>
-        {% if forloop.counter|divisibleby:3 %}
-        </div>
-        <div class="row" style="margin-bottom: 50px;">
-        {%endif%}
         {% endfor %}
         </div>
 

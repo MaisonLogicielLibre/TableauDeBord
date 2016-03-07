@@ -10,63 +10,91 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{% trans "Presence in Centech" %}</h1>
-    <div class="row">
-        <div class="col-sm-12">
-        <hr>
-        <!-- TO SELECT THE STATUS WHAT WE WANT DISPLAY -->
-        <label for="status">{% trans "Select a status" %} : </label>
-        <select id="status" onchange='getUrl("company:presence_list", this.value, true);'>
-            {% for status in list_company_status %}
-                {% if status.id == status_selected.id%}
-                    <option value='{{status.id}}' selected="selected">{{status.status}}</option>
-                {% else %}
-                    <option value='{{status.id}}'>{{status.status}}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <hr>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12" style="overflow-y:auto" >
-            <!-- THE STATUS WHAT WE WANT DISPLAY -->
-            <table cellpadding="0" cellspacing="0" class="table table-bordered">
-                <tr>
-                    <th>{% trans "Date" %}</th>
-                    {% for company in companies %}
-                        <th>{{company.name}}</th>
-                    {% endfor %}
-                    {% if isCentech == True %}
-                    <th>{% trans "Modify" %}</th>
-                    <th>{% trans "Delete" %}</th>
+    {% if status_selected %}
+        <h1>{% trans "Presence in Centech for company status" %} {{status_selected.status}}</h1>
+        <div class="row">
+            <div class="col-sm-12">
+            <hr>
+            <!-- TO SELECT THE STATUS WHAT WE WANT DISPLAY -->
+            <label for="status">{% trans "Select a status" %} : </label>
+            <select id="status" onchange='getUrl("company:presence_list", this.value, true);'>
+                {% for status in list_company_status %}
+                    {% if status.id == status_selected.id%}
+                        <option value='{{status.id}}' selected="selected">{{status.status}}</option>
+                    {% else %}
+                        <option value='{{status.id}}'>{{status.status}}</option>
                     {% endif %}
-
-                </tr>
-                {% for presence in presence_list %}
-                    <tr>
-                        <td>{{ presence.date }}</td>
-                        {% if presence.company.all %}
-                            {% for company in companies %}
-                                {% if company in presence.company.all%}
-                                <td style="background-color: #00baba;">
-                                {% else %}
-                                <td style="background-color: #ff9966;">
-                                {% endif %}
-                                </td>
-                            {% endfor %}
-                        {% endif %}
-                        {% if isCentech == True %}
-                        <td><a href="{% url 'company:presence_update' presence.id %}">{% trans "Modify" %}</a></td>
-                        <td><a href="{% url 'company:presence_delete' presence.id %}">{% trans "Delete" %}</a></td>
-                        {% endif %}
-                    </tr>
                 {% endfor %}
-            </table>
+            </select>
+            <hr>
+            </div>
         </div>
-        {% if isCentech == True %}
-           <a href="{% url 'company:presence_add' %}">{% trans "New Presence" %}</a>
+
+        {% if companies %}
+            <div class="row">
+                <div class="col-sm-12" style="overflow-y:auto" >
+                    <!-- THE STATUS WHAT WE WANT DISPLAY -->
+                    {% if presence_list %}
+                        <table cellpadding="0" cellspacing="0" class="table table-bordered">
+                            <tr>
+                                <th>{% trans "Date" %}</th>
+                                {% for company in companies %}
+                                    <th>{{company.name}}</th>
+                                {% endfor %}
+                                {% if isCentech == True %}
+                                <th>{% trans "Modify" %}</th>
+                                <th>{% trans "Delete" %}</th>
+                                {% endif %}
+
+                            </tr>
+                            {% for presence in presence_list %}
+                                <tr>
+                                    <td>{{ presence.date }}</td>
+                                    {% if presence.company.all %}
+                                        {% for company in companies %}
+                                            {% if company in presence.company.all%}
+                                            <td style="background-color: #00baba;">
+                                            {% else %}
+                                            <td style="background-color: #ff9966;">
+                                            {% endif %}
+                                            </td>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if isCentech == True %}
+                                    <td><a href="{% url 'company:presence_update' presence.id %}">{% trans "Modify" %}</a></td>
+                                    <td><a href="{% url 'company:presence_delete' presence.id %}">{% trans "Delete" %}</a></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <div class="alert alert-warning">{% trans "No one presence for the moment" %}</div>
+                    {% endif %}
+                </div>
+                {% if isCentech == True %}
+                   <a href="{% url 'company:presence_add' %}">{% trans "New Presence" %}</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="panel">
+            <div class="panel-body">
+                <h1>{% trans "Sorry! But you have no company in this status." %}</h1>
+
+                <p>{% trans "To manage presence, you must first create companies in this status or select an other status." %}</p>
+
+                <p><a href="{% url 'company:create' %}" class="btn btn-primary" >Create company</a></p>
+            </div>
+        </div>
         {% endif %}
-    </div>
+    {% else %}
+        <div class="panel">
+            <div class="panel-body">
+                <h1>{% trans "Sorry! But you have no company status to access this feature." %}</h1>
+
+                <p>{% trans "To manage presence, you must first create company status and companies." %}</p>
+
+                <p><a href="{% url 'company:status_create' %}" class="btn btn-primary" >Create status</a></p>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

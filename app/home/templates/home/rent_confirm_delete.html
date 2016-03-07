@@ -1,0 +1,35 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n staticfiles %}
+{% block title %}{% trans "Rental" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Rental" %}</h1>
+    <h1>{% trans "Are you sure you want to delete this rental?" %}</h1>
+
+    <table class="table table-bordered table-striped" style="width:auto">
+        <tr>
+            <th class="col-md-4">{% trans "Field" %}</th>
+            <th>{% trans "Data" %}</th>
+        </tr>
+        <tr>
+            <th>{% trans "Room" %} :</th>
+            <td>{{ rent.room.code }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Start Date" %} :</th>
+            <td>{{ rent.date_start }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "End Date" %} :</th>
+            <td>{{ rent.date_end }}</td>
+        </tr>
+        <tr>
+            <th>{% trans "Company" %} :</th>
+            <td>{{ rent.company.name }}</td>
+        </tr>
+    </table>
+    <form method="post" action="">
+       {% csrf_token %}
+       <button type="submit">{% trans "Delete" %}</button> - <a href="{% url 'company:detail' rent.company.id%}">{% trans "Cancel" %}</a>
+    </form>
+{% endblock %}

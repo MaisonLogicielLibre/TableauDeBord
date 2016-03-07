@@ -23,24 +23,23 @@
             </form>
         </div>
     </div>
+
     {% if filter %}
     <div class="row">
     {% for company in filter %}
-        <div class="col-md-4" style="height: 150px;">
-        <a href="{% url 'company:detail' company.id %}">
-        {% if company.logo != "" %}
-            <img src="/media/{{ company.logo }}" style="height:70%; max-width: 100%;"/><br>
-        {% else %}
-            <img src="/media/logo/default.jpg" style="height:70%; max-width: 100%;"/><br>
-        {% endif %}
-        <strong>{{ company.name }}</strong>
-        </a>
-        <br>{% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
-        </div>
-        {% if forloop.counter|divisibleby:3 %}
+        <div class="col-md-4" style="padding: 10px;">
+            <div class="panel" style="height: 150px; padding: 10px;">
+                <a href="{% url 'company:detail' company.id %}">
+                {% if company.logo != "" %}
+                    <img src="/media/{{ company.logo }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                {% else %}
+                    <img src="/media/logo/default.jpg"  class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                {% endif %}
+                <strong>{{ company.name }}</strong>
+                </a>
+                <br>{% trans "Incubation phase" %} : {{ company.companyStatus }}<br>
             </div>
-            <div class="row" style="margin-bottom: 30px;">
-        {%endif%}
+        </div>
     {% endfor %}
         </div>
     {% else %}

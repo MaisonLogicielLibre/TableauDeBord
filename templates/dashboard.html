@@ -64,7 +64,7 @@
                     ============= COMPAGNIE MENU ==============
                     ------------------------------------------>
                     {% if list_company %}
-                        <select id="selectCompany" class="menuDashboard" onchange="updateMenu(this.value)">
+                        <select id="selectCompany" class="menuDashboard form-control" onchange="updateMenu(this.value)">
                             <option disabled="True">{% trans "Select a company" %}</option>
                             {% for company in list_company %}
                                 {% if request.session.companySelected == company.id %}
@@ -200,6 +200,13 @@
                                     <a href="{% url 'company:create' %}" style="text-decoration: none; color: black; font-size: 14px;">
                                         <div class="dropdown-messages-box">
                                             <i class="fa fa-university"></i> {% trans "Add new company" %}
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'company:rental_create' %}" style="text-decoration: none; color: black; font-size: 14px;">
+                                        <div class="dropdown-messages-box">
+                                            <i class="fa fa-street-view"></i> {% trans "Add new rental" %}
                                         </div>
                                     </a>
                                 </li>

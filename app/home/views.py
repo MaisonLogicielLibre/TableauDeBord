@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from app.company.models import Company, CompanyStatus
 from app.company.forms import MiniCompanyStatusUpdateForm
 from app.mentor.models import Mentor
-from app.home.models import FloorPlan
+from app.home.models import RoomType, Room
 
 
 class Summary(generic.TemplateView):
@@ -266,9 +266,9 @@ def get_url(request, namespace, arguments=""):
 
 class floor_plan(generic.ListView):
     # Floor Plan Page
-    model = FloorPlan
+    model = Room
     template_name = 'home/floorPlan.html'
-    context_object_name = 'list_floor_plan'
+    context_object_name = 'list_room_data'
 
     # You need to be connected, and you need to have access as centech only
     @method_decorator(login_required)

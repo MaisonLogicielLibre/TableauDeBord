@@ -4,5 +4,7 @@ media/logo/*
 media/user_profile/*
 !media/user_profile/default.jpg
 
-.idea/workspace.xml
+.idea
 *.pyc
+
+env

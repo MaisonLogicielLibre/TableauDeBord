@@ -1,0 +1,33 @@
+{% extends "dashboard.html" %}
+<!-- Load internationalisation utils-->
+{% load i18n staticfiles bootstrap3 %}
+
+{% block title %}{% trans "Rental" %}{% endblock %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/filteredSelectedMultiple.css' %}" />
+    <script src="{% static 'js/filteredSelectedMultiple.js' %}"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+{% endblock %}
+
+{% block content %}
+    <form enctype="multipart/form-data" method="post">{% csrf_token%}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% trans "Save" %}
+            </button>
+            <button type="reset" class="btn">
+                {% trans "Reset" %}
+            </button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        $( "#id_date_start, #id_date_end" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    </script>
+{% endblock %}

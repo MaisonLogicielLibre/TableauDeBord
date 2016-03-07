@@ -61,23 +61,21 @@
     {% endif %}
 
     {% if founder_list %}
-        <div class="row" style="margin-bottom: 50px;">
+        <div class="row">
         {% for founder in founder_list %}
-                <div class="col-md-4" style="height: 150px; margin-bottom: 30px;">
+            <div class="col-md-3" style="padding: 10px;">
+                <div class="panel" style="height: 150px; padding: 10px;">
                     <a href="{% url 'founder:detail' founder.pk %}">
-                    {% if founder.picture != "" %}
-                    <img src="/media/{{ founder.picture }}" style="height:100%; max-width: 100%;"/><br>
-                    {% else %}
-                    <img src="/media/user_profile/default.jpg" style="height:100%; max-width: 100%;"/><br>
-                    {% endif %}
-                    <strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong>
-                    </a>
-                    <br>
+                        {% if founder.picture != "" %}
+                        <img src="/media/{{ founder.picture }}" class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                        {% else %}
+                        <img src="/media/user_profile/default.jpg"  class="thumbnail" style="margin-bottom: 0px; height:70%; max-width: 100%;"/>
+                        {% endif %}
+                        <strong>{{ founder.user.first_name }} {{ founder.user.last_name }}</strong>
+                    </a><br/>
+                    Fondateur
                 </div>
-                {% if forloop.counter|divisibleby:3 %}
-                </div>
-                <div class="row" style="margin-bottom: 50px;">
-                {%endif%}
+            </div>
         {% endfor %}
         </div>
     {% else %}

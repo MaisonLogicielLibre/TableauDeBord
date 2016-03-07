@@ -31,6 +31,12 @@ class Mentor(UserProfile):
         self.updated = timezone.now()
         super(Mentor, self).save(*args, **kwargs)
 
+    def get_type(self):
+        if self.type:
+                return 'Mentor ' + MENTOR_TYPE_CHOICES[int(self.type)-1][1]
+        else:
+                return 'Mentor'
+
     def image_thumb(self):
         return '<img src="/media/%s" width="100" height="100" />' % (self.picture)
     image_thumb.allow_tags = True
