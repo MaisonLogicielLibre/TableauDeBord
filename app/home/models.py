@@ -103,19 +103,6 @@ class UserProfile(models.Model):
             return False
 
 
-# Deprecated : Use classes Rent classes instead
-class FloorPlan(models.Model):
-    title = models.CharField(max_length=100,verbose_name=_('Title'))
-    image = models.ImageField(upload_to='floor_plan', verbose_name=_('Image'))
-
-    def __unicode__(self):
-        return self.title
-
-    def image_thumb(self):
-        return '<img src="/media/%s" width="100" height="100" />' % (self.image)
-    image_thumb.allow_tags = True
-
-
 class RoomType(models.Model):
     # Data
     name = models.CharField(max_length=100, verbose_name=_('Name'))
