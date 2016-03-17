@@ -23,7 +23,10 @@ pip install -r requirements.txt
 
 Cet exemple ce base sur l'utilisation d'une table MySQL.
 
- 1 - Créer une nouvelle base de données.
+ 1 - Créer une nouvelle base de données. Pour utiliser les paramètres par défaut et sauter l'étape 2:
+ * Nom de la base de données: centech_dashboard
+ * Nom d'utilisateur: centech
+ * Mot de passe: centech
 
  2 - Entrez vos paramètres de connexion dans `../TableauDeBord/centech2/settings.py`
 
