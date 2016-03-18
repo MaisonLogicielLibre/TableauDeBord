@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/CentechMTL/TableauDeBord.png?label=ready&title=Ready)](https://waffle.io/CentechMTL/TableauDeBord)
 [![Build Status](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord.svg?branch=master)](https://travis-ci.org/MaisonLogicielLibre/TableauDeBord)
 [![Coverage Status](https://coveralls.io/repos/MaisonLogicielLibre/TableauDeBord/badge.svg?branch=master&service=github)](https://coveralls.io/github/MaisonLogicielLibre/TableauDeBord?branch=master)
 [![Licence GPL](http://img.shields.io/badge/license-GPL-green.svg)](http://www.gnu.org/licenses/quick-guide-gplv3.fr.html)
