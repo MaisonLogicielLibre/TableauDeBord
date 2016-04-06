@@ -68,28 +68,28 @@ External contributions are welcome!
     * Make sure you have the latest project version
     * Describe clearly your problem and the sequence to reproduce it
 
-3. **Flag yourself** on the _issue_. It is important for a good work flow. If you are not aprt of the organisation, thus can't flag yourself on the _issue_, you just need to add _"Working on it"_ and the _issue_ will mark as "In progress".
+3. **Flag yourself** on the _issue_. It is important for good workflow. If you are not a part of the organization, thus can't flag yourself on the _issue_, you just need to add _"Working on it"_ and the _issue_ will mark as "In progress".
 
-4. _Fork_ the repo
+4. _Fork_ the repository
 
 # Contribute to the website
 1. Create a branch
 2. Work on it
-3. Test your code!. Only documentation and refactoring modifications does not need to have new tests.
-4. Make sure the tests are sucessful
+3. Test your code! Only documentation and refactoring modifications does not need to have new tests.
+4. Make sure the tests are successful
 5. If your work need specific tasks for deployment, make sure to notify it in [update.md](update.md).
 6. Push and create a _pull request_
 
 # Good practices
-* Code and comments are in english
+* Code and comments are in English
 * Follow [Git _workflow_ ](http://nvie.com/posts/a-successful-git-branching-model/).
-    * Functionnality and big bugs are made via Pull Requests
-    * One bug/fucntionnality per pull requests, no exception!
+    * Functionality and big bugs are made via Pull Requests
+    * One bug/functionality per pull request, no exception!
     * Those pull requests are merged into the `dev` branch (Git flow : `develop` branch)
     * Name the branch based on the modification : `hotfix-XXX`, `feature-XXX`, etc.
-    * The branch `prod` (Git flow : `master` branch)  contains the production code. Do not try to _commit_ on this branch !
+    * The branch `prod` (Git flow : `master` branch) contains the production code. Do not try to _commit_ on this branch !
 
-* Your test must fail before your modification and pass with it
+* Your test must fail before your edits and then pass with them
 * Make thorough _commit_ comment
 * No test, no _pull request_
 
@@ -101,18 +101,18 @@ External contributions are welcome!
     | Q                             | R
     | ----------------------------- | -------------------------------------------
     | Bug fix ?                     | [yes|no]
-    | New functionnality ?          | [yes|no]
+    | New functionality ?           | [yes|no]
     | Tickets (_issues_) reference  | [List of ticket seprated by ;]
     ```
 * Add QA comments. Those comments help to comprehend what have been modified, what must be tested and the more risky part of the code. Make sure to comment if a setup is needed beforehand.
 
 ## Commits
 * For commits, we follow the Git philosophy :
-    * The first line must not be more than 50 caracters
+    * The first line must not be more than 50 characters
     * If needed, complete your commit by adding comments (maximum of 70 characters per following lines)
     * Reference the _issue_ associated with the fix
-    * One fix , and one good fix only, per commit (atomic)
+    * One fix, and one good fix only, per commit (atomic)
 
-* Make sure your pull request does not have any useless commits E.G (`fix previous commit`, ...). If you have any, squash it.
+* Make sure your pull request does not have any useless commits (e.g. `fix previous commit`, ...). If you have any, squash them.
 
-Dont hesitate to ask for help, good luck!
+Don't hesitate to ask for help, good luck!
