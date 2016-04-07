@@ -40,6 +40,10 @@ input[type='text'] {
 	width: 300px;
 }
 
+input[type='number'] {
+	width: 150px;
+}
+
 input#id_priority {
 	width: 30px;
 }
