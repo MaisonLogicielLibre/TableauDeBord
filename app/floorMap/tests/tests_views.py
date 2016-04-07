@@ -23,6 +23,85 @@ class FloorMapTest (TestCase):
 
         self.status = CompanyStatusFactory()
 
+    def test_room_update(self):
+        """
+        Tests access to room update form
+        """
+
+        """
+        Access : Staff
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.staff.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 200)
+
+        """
+        Access : Founder
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.founder.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        Access : Mentor
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.mentor.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        Access : Executive
+        """
+        self.client.logout()
+        self.client.login(
+            username=self.executive.user.username,
+            password="Toto1234!#"
+        )
+
+        result = self.client.get(
+            reverse('floorMap:room_update'),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
+        """
+        No Access : Not logged
+        """
+        self.client.logout()
+
+        result = self.client.get(
+            reverse(
+                'floorMap:room_update', kwargs={
+                    'pk': self.founder.userProfile_id
+                }),
+            follow=False
+        )
+        self.assertEqual(result.status_code, 302)
+
     def test_floorMap(self):
         """
         To test the display of the floor map.
