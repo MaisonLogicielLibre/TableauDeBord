@@ -6,7 +6,36 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 from app.company.models import Company
-from app.floorMap.models import Rent, Room
+from app.floorMap.models import Rent, Room, RoomType
+
+
+class RoomFormUpdate(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = ['type', 'code', 'static_label', 'surface_size']
+
+    type = forms.ModelChoiceField(
+        label=_(u"Type"),
+        queryset=RoomType.objects.all().order_by('name'),
+        required=True,
+        initial=0,
+    )
+
+    code = forms.CharField(
+        label=_(u"Room code"),
+        required=True,
+    )
+
+    static_label = forms.CharField(
+        label=_(u"Static label"),
+        required=False,
+        help_text=_(u"Leave empty if room type is rental.")
+    )
+
+    surface_size = forms.IntegerField(
+        label=_(u"Area size"),
+        required=False,
+    )
 
 
 class RentalForm(forms.ModelForm):

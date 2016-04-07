@@ -10,7 +10,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views import generic
 
-from app.floorMap.forms import RentalForm, RentalFormUpdate
+from app.floorMap.forms import RentalForm, RentalFormUpdate, RoomFormUpdate
 from app.floorMap.models import Room, Rent
 
 
@@ -31,6 +31,31 @@ class FloorMapIndex(generic.ListView):
 
         # The visitor can't see this page!
         return HttpResponseRedirect("/user/noAccessPermissions")
+
+
+class RoomUpdate(generic.UpdateView):
+    # Update a room
+    model = Room
+    template_name = 'floorMap/room_update.html'
+    form_class = RoomFormUpdate
+
+    # You need to be connected, and you need to have access
+    # as centech only
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        if self.request.user.profile.isCentech():
+            return super(RoomUpdate, self).dispatch(*args, **kwargs)
+
+        # The visitor can't see this page!
+        return HttpResponseRedirect("/user/noAccessPermissions")
+
+    def get_success_url(self):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            _(u'The room has been saved.')
+        )
+        return reverse_lazy('floorMap:index')
 
 
 class RentalCreate(generic.CreateView):
