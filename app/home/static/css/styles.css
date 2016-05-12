@@ -13,6 +13,16 @@
     text-align: center;
 }
 
+/* Jquery-ui */
+
+.ui-datepicker-title select {
+    color: #000000;
+}
+
+.month_year_datepicker .ui-datepicker-calendar {
+  display: none;
+}
+
 /*Distributed*/
 
 ul.messages li {

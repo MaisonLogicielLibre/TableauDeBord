@@ -48,4 +48,12 @@ urlpatterns = patterns(
         views.RentalDelete.as_view(),
         name='rental_delete'
     ),
+
+    # Forms for invoicing
+
+    url(
+        r'^invoicing$',
+        views.Invoicing.as_view(),
+        name='invoicing'
+    ),
 )

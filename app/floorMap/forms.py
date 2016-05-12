@@ -1,12 +1,46 @@
 # coding: utf-8
 
+from datetime import date, datetime
+
 from django import forms
 from django.db.models import Q
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from django_filters import FilterSet, MethodFilter
 
 from app.company.models import Company
 from app.floorMap.models import Rent, Room, RoomType, Settings
+
+
+class InvoiceFilter(FilterSet):
+    date = MethodFilter(
+        label=_(u"Select a month"),
+        widget=forms.DateInput(
+            format='%B %Y',
+            attrs={
+                'class': 'ui-monthpicker'
+            }
+        ),
+        action='date_filter'
+    )
+
+    class Meta:
+        model = Rent
+        fields = ['date']
+
+    @staticmethod
+    def date_filter(queryset, value):
+        try:
+            input_date = datetime.strptime(value, '%B %Y')
+            year = input_date.year
+            month = input_date.month
+        except ValueError or TypeError:
+            return queryset.none()
+
+        return queryset.filter(
+            date_start__lt=date(year, month % 12 + 1, 1),
+            date_end__gte=date(year, month, 1)
+        )
 
 
 class RoomFormUpdate(forms.ModelForm):
@@ -185,11 +219,25 @@ class RentalFormUpdate(RentalForm):
 class SettingsFormUpdate(forms.ModelForm):
     class Meta:
         model = Settings
-        fields = ['default_annual_rental_rate']
+        fields = ['default_annual_rental_rate', 'taxes_tps', 'taxes_tvq']
 
     default_annual_rental_rate = forms.DecimalField(
         label=_(u"Default annual price (per sq. ft.)"),
         required=True,
         max_digits=5,
         decimal_places=2
+    )
+
+    taxes_tps = forms.DecimalField(
+        label=_(u"TPS %"),
+        required=True,
+        max_digits=7,
+        decimal_places=3
+    )
+
+    taxes_tvq = forms.DecimalField(
+        label=_(u"TVQ %"),
+        required=True,
+        max_digits=7,
+        decimal_places=3
     )

@@ -41,6 +41,7 @@ def company_select(request):
             list_menu = [
                 'companies',
                 'floorMap',
+                'invoicing',
                 'mentors',
                 'founders',
                 'road_map',

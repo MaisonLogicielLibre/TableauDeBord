@@ -24,6 +24,9 @@
                 {% if "floorMap" in list_menu %}
                     <a href="{% url 'floorMap:index' %}"><div><i class="fa fa-street-view "></i> <span class="nav-label">{% trans "Floor plan" %}</span></div></a>
                 {% endif %}
+                {% if "invoicing" in list_menu %}
+                    <a href="{% url 'floorMap:invoicing' %}"><div><i class="fa fa-dollar"></i> <span class="nav-label">{% trans "Invoicing" %}</span></div></a>
+                {% endif %}
                 {% if "companies" in list_menu %}
                     <a href="{% url 'company:index' %}"><div><i class="fa fa-university"></i> <span class="nav-label">{% trans "Companies" %}</span></div></a>
                 {% endif %}

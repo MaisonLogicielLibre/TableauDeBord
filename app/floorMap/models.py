@@ -221,6 +221,20 @@ class Rent(models.Model):
             str(self.date_end)
         ))
 
+    # Annual before taxes
+    def get_annual_fee(self):
+        surface = (self.room.surface_size or 0)
+        annual_pricing = self.pricing
+
+        annual_fee = surface * annual_pricing
+
+        return round(annual_fee, 2)
+
+    # Monthly before taxes
+    def get_monthly_fee(self):
+        monthly_fee = self.get_annual_fee() / 12
+        return round(monthly_fee, 2)
+
 
 # SIGNAL CONNECTION
 models.signals.post_save.connect(
@@ -257,9 +271,23 @@ class Settings(models.Model):
     # Annual rental rate, in square foot
     # Mainly used for invoicing
     default_annual_rental_rate = models.DecimalField(
-        default='%.2f' % 0.0,
+        default=0,
         max_digits=5,
         decimal_places=2,
         verbose_name=_(u'Default annual rental rate'),
         help_text=_(u'Per sq. ft.'),
+    )
+
+    taxes_tps = models.DecimalField(
+        default=0,
+        max_digits=5,
+        decimal_places=3,
+        verbose_name=_(u'TPS %'),
+    )
+
+    taxes_tvq = models.DecimalField(
+        default=0,
+        max_digits=5,
+        decimal_places=3,
+        verbose_name=_(u'TVQ %'),
     )

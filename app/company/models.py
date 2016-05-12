@@ -34,6 +34,11 @@ class Company(models.Model):
     class Meta:
         verbose_name_plural = _('Companies')
 
+    PAYMENT_METHODS = (
+        ('CHQ', 'Cheque'),
+        ('PPA', 'PPA'),
+    )
+
     # General information
     name = models.CharField(
         max_length=200,
@@ -113,6 +118,21 @@ class Company(models.Model):
         max_length=12,
         blank=True,
         verbose_name=_('Phone number')
+    )
+
+    person_in_charge = models.ForeignKey(
+        'founder.Founder',
+        blank=True,
+        null=True,
+        verbose_name=_('Person in charge'),
+        related_name='in_charge_of'
+    )
+
+    payment_method = models.CharField(
+        blank=True,
+        max_length=3,
+        choices=PAYMENT_METHODS,
+        verbose_name=_('Payment method')
     )
 
     created = models.DateTimeField(blank=True)

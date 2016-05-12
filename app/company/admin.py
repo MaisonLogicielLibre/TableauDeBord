@@ -25,7 +25,12 @@ class CompanyAdmin(admin.ModelAdmin):
         ('Promotion', {
            'description': u'This information is the one present '
                           u'on the presentation page!',
-           'fields': ('url', 'video', 'description')
+           'fields': (
+               'url',
+               'video',
+               'description',
+               'phone',
+           )
         }),
 
         # Fieldset 3 : centech
@@ -35,7 +40,9 @@ class CompanyAdmin(admin.ModelAdmin):
                'founders',
                'mentors',
                'created',
-               'updated'
+               'updated',
+               'person_in_charge',
+               'payment_method',
            )
         }),
     )
