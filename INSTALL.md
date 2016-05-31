@@ -19,6 +19,12 @@ cd chemin/vers/TableauDeBord/
 pip install -r requirements.txt
 ```
 
+ 4 - Installation de django-celery
+ 
+```
+easy_install django-celery
+```
+
 ## Configuration de la base de données
 
 Cet exemple ce base sur l'utilisation d'une table MySQL.
@@ -46,6 +52,7 @@ DATABASES = {
  ```
  cd ../chemin/vers/TableauDeBord/
  python manage.py migrate
+ python manage.py syncdb
  ```
 
  4 - Populer votre base de données avec le fichier `../TableauDeBord/populate.sql`
@@ -96,18 +103,27 @@ DASHBOARD_APP = {
 
 A ce stade votre application est déjà opérationnelle. Vous disposez d'un compte administrateur et avez apporter toutes les configurations requises.
 
-1 - Lancer votre serveur
+1 - Rafraîchir l'image du plan d'étage
 ```
 cd ../chemin/vers/TableauDeBord/
+python manage.py updateFloorMap
+```
+
+2 - Lancer votre serveur
+```
 python manage.py runserver
 ```
 
- 2 - Rendez-vous à l'addresse `127.0.0.1:8000` avec votre navigateur
+3 - Rendez-vous à l'addresse `127.0.0.1:8000` avec votre navigateur
 
- 3 - Connectez-vous avec le compte administrateur :
- * Nom d'utilisateur : root
- * Mot de passe : root
-
-4 - Changez votre mot de passe grâce au menu en haut à droite `menu->Modifier_le_mot_de_passe`.
-
+4 - Connectez-vous avec le compte administrateur : 
+* Nom d'utilisateur : root
+* Mot de passe : root
+ 
+5 - Changez votre mot de passe grâce au menu en haut à droite `menu->Modifier_le_mot_de_passe`.
+ 
 Bienvenue sur votre tableau de bord personnel!
+
+# Configuration de Celery (optionel)
+
+Voir ressource développeur à [cette adresse](https://github.com/CentechMTL/TableauDeBord/wiki/Outils-avec-Django-Celery#configuration-de-celery).
