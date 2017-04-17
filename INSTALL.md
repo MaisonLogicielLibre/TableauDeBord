@@ -14,6 +14,12 @@
 
 >**WARNING** Si vous êtes sous Windows, supprimer mysql-python du fichier requirements.txt et installer le manuellement depuis [cette page](https://pypi.python.org/pypi/MySQL-python/1.2.5)
 
+>**WARNING** Si vous êtes sur Ubuntu, vous aurez à ajouter les paquets suivants avant de rouler le pip install
+
+```
+apt-get install python-dev libmysqlclient-dev
+```
+
 ```
 cd chemin/vers/TableauDeBord/
 pip install -r requirements.txt
